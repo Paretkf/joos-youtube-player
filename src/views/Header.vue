@@ -1,10 +1,10 @@
 <template>
-<div class="home w-100pct bg-cl-info dp-flex jtf-ct-space-between">
+<div class="home w-100pct cl-primary dp-flex jtf-ct-space-between">
   <div class="home w-50pct dp-flex jtf-ct-flex-start al-it-center pd-hrzt-20px">
-    <span class="f-s-25px f-w-bold cl-white cs-pointer">+Album</span>
+    <span class="f-s-25px f-w-bold cl-white cs-pointer" @click="$router.push({name: 'CreateAlbums'})">+Album</span>
   </div>
   <div class="home w-50pct dp-flex jtf-ct-flex-end al-it-center pd-hrzt-20px">
-    <span @click="login()" class="f-s-25px f-w-bold cl-white cs-pointer" v-if="!user.user"> Login With Facebook</span>
+    <span @click="login()" class="f-s-25px f-w-bold cl-white cs-pointer" v-if="!user.user">Facebook</span>
     <div v-else class="dp-flex al-it-center">
       <img :src="user.user.photoURL" alt="" class="bd-rd-20px mg-r-10px">
       <span class="f-w-bold cl-white mg-r-10px">

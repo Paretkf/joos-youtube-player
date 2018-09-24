@@ -1,15 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import firebase from 'firebase'
-const config = {
-  apiKey: 'AIzaSyB2LD6TMfj2bM12LQHxu8buuEovh7x8J80',
-  authDomain: 'it-20y.firebaseapp.com',
-  databaseURL: 'https://it-20y.firebaseio.com',
-  projectId: 'it-20y',
-  storageBucket: 'it-20y.appspot.com',
-  messagingSenderId: '68611767349'
-}
-firebase.initializeApp(config)
+import firebase from 'firebase/app'
+import { firebaseMutations, firebaseAction } from 'vuexfire'
+require('firebase/database')
+require('firebase/auth')
+const { config } = require('@/config')
+
+const app = firebase.initializeApp(config)
 const provider = new firebase.auth.FacebookAuthProvider()
 provider.addScope('public_profile')
 provider.setCustomParameters({
@@ -17,19 +14,35 @@ provider.setCustomParameters({
 })
 Vue.use(Vuex)
 
+const db = app.database()
+const allAlbumsRef = db.ref('allAlbums')
+
 const state = {
-  user: {}
+  user: {},
+  allAlbums: [],
+  playingAlbum: {}
+}
+
+const getters = {
+  playingAlbum: state => state.playingAlbum
 }
 
 const mutations = {
+  ...firebaseMutations,
   SET_USER (state, data) {
     state.user = data
   },
   LOG_OUT (state) {
     state.user = {}
+  },
+  SET_PLAYING_ALBUM (payload) {
+    state.playingAlbum = payload
   }
 }
 const actions = {
+  setPlayingAlbum ({commit}, payload) {
+    commit('SET_PLAYING_ALBUM', payload)
+  },
   login ({commit}) {
     firebase.auth().signInWithPopup(provider).then((result) => {
       commit('SET_USER', result)
@@ -39,7 +52,16 @@ const actions = {
     firebase.auth().signOut().then(() => {
       commit('LOG_OUT')
     })
-  }
+  },
+  createNewAlbum ({commit}, payload) {
+    allAlbumsRef.push(payload)
+  },
+  bindAllAlbumsRef: firebaseAction(({ bindFirebaseRef }) => {
+    bindFirebaseRef('allAlbums', allAlbumsRef)
+  }),
+  unbindAllAlbumsRef: firebaseAction(({ unbindFirebaseRef }) => {
+    unbindFirebaseRef('allAlbums')
+  })
 }
 
 const modules = {}
@@ -48,5 +70,6 @@ export default new Vuex.Store({
   state,
   mutations,
   actions,
+  getters,
   modules
 })
