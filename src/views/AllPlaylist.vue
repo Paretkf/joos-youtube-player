@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div v-for="(album, index) in allAlbums" :key="index" :title="album.name" @click="setPlayingAlbum(album)" class="cs-pointer card pd-5px f-left w-fit-content dp-flex f-drt-column mg-r-10px mg-bt-10px">
+    <div v-for="(album, index) in allAlbums" :key="index" :title="album.name" @click="setAlbum(album)" class="cs-pointer card pd-5px f-left w-fit-content dp-flex f-drt-column mg-r-10px mg-bt-10px">
       <!-- {{allAlbums}} -->
       <img :src="album.img" :alt="album.name" width="150">
       <span class="f-w-bold sweet-label mg-auto">
@@ -25,7 +25,10 @@ export default {
       bindAllAlbumsRef: 'bindAllAlbumsRef',
       unbindAllAlbumsRef: 'unbindAllAlbumsRef',
       setPlayingAlbum: 'setPlayingAlbum'
-    })
+    }),
+    setAlbum (album) {
+      this.setPlayingAlbum(album)
+    }
   },
   created () {
     this.bindAllAlbumsRef()

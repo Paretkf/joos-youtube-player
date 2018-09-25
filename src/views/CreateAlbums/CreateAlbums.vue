@@ -15,7 +15,7 @@
         </div>
         <div>
           <span class="f-w-bold">Image</span>
-          <input type="text" class="input is-primary" v-model="newAlbum.image">
+          <input type="text" class="input is-primary" v-model="newAlbum.img">
         </div>
         <div class="pd-5px t-al-center">
           <img :src="newAlbum.image" alt="">
@@ -54,8 +54,7 @@ export default {
             url: ''
           }
         ]
-      },
-      amountSong: 1
+      }
     }
   },
   methods: {

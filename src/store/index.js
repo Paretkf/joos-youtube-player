@@ -35,11 +35,18 @@ const mutations = {
   LOG_OUT (state) {
     state.user = {}
   },
-  SET_PLAYING_ALBUM (payload) {
+  SET_PLAYING_ALBUM (state, payload) {
     state.playingAlbum = payload
   }
 }
 const actions = {
+  nextAlbum ({state, commit}) {
+    let index = 0
+    do {
+      index = Math.floor(Math.random() * state.allAlbums.length)
+    } while (state.allAlbums[index]['.key'] === state.playingAlbum['.key'])
+    commit('SET_PLAYING_ALBUM', state.allAlbums[index])
+  },
   setPlayingAlbum ({commit}, payload) {
     commit('SET_PLAYING_ALBUM', payload)
   },

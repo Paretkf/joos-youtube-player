@@ -5,19 +5,29 @@
       <router-view/>
     </div>
     <div>
-      <Player/>
+      <Play/>
     </div>
+    <b-modal :active.sync="isImageModalActive">
+      <p class="image is-4by3">
+        <img src="/static/img/loading.gif">
+      </p>
+    </b-modal>
   </div>
 </template>
 
 <script>
 import Header from '@/views/Header'
-import Player from '@/views/Player'
+import Play from '@/views/Play'
 export default {
   name: 'AppMain',
+  data () {
+    return {
+      isImageModalActive: false
+    }
+  },
   components: {
     Header,
-    Player
+    Play
   }
 }
 </script>
