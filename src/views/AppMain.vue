@@ -2,6 +2,7 @@
   <div class="body">
     <Header/>
     <div class="pd-20px app-body">
+      <span class="cl-white">Version beta 0.0.1c</span>
       <router-view/>
     </div>
     <div>
