@@ -82,7 +82,7 @@ export default {
     },
     song () {
       if (this.playingAlbum.song) {
-        return this.playingAlbum.song[this.index].name + ' | ' + this.playingAlbum.name
+        return this.playingAlbum.song[this.index].name + ' | ALBUM : ' + this.playingAlbum.name + ' | ARTIST : ' + this.playingAlbum.artist
       } else {
         return 'Renai Circulation'
       }
