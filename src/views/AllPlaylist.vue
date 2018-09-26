@@ -1,7 +1,7 @@
 <template>
   <div id="wrapper">
     <div class="pin" id="columns">
-      <div v-for="(album, index) in allAlbums" :key="index" :title="album.name" @click="setAlbum(album)" class="pin cs-pointer card pd-5px w-fit-content t-al-center mg-r-10px mg-bt-10px">
+      <div v-for="(album, index) in allAlbums" :key="index" :title="album.name" @click="setAlbum(album)" class="pin cs-pointer card pd-5px w-fit-content t-al-center  mg-bt-10px">
         <!-- {{allAlbums}} -->
         <img :src="album.img" :alt="album.name" width="150"> <br>
         <span class="f-w-bold sweet-label mg-auto">
