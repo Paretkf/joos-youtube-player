@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="body">
     <Header/>
     <div class="pd-20px app-body">
       <router-view/>
@@ -33,6 +33,12 @@ export default {
 </script>
 
 <style scoped>
+.body {
+  background: #F2F6FA;
+  background:url('/static/img/bg.jpg');
+  background-size: cover;
+  background-position: center;
+}
 .app-body {
   overflow: auto;
   height: calc(100vh - 120px);

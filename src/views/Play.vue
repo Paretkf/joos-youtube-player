@@ -92,8 +92,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .hello {
+  /* position: absolute; */
   height: 60px;
-  background-color: #FF99CC;
+  background-color: rgb(255, 153, 204, 0.7);
   padding: 0px 10px 0px 10px;
 }
 </style>

@@ -19,6 +19,7 @@ export default {
   background-color: #FF99CC;
 }
 .card {
+  background-color: rgb(255, 255, 255, 0.8);
   border-radius: 4px;
 }
 .input.is-primary, .taginput .is-primary.taginput-container.is-focusable, .textarea.is-primary {
