@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="column is-4 is-offset-4 card">
+  <div class="">
+    <div class="column is-4 is-offset-4 card create-album">
       <div class="t-al-center">
         <span class="sweet-label f-bold f-s-24px">Create New Album</span>
       </div>
@@ -143,5 +143,9 @@ export default {
   text-align: center;
   border-radius: 50%;
   cursor: pointer;
+}
+.create-album {
+  height: calc(100vh - 180px);
+  overflow: auto;
 }
 </style>

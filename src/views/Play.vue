@@ -1,10 +1,10 @@
 <template>
   <div class="hello">
-    <div class="song-list pd-5px" v-show="activeSonglist">
+    <div class="song-list pd-5px ovf-auto" v-show="activeSonglist">
       <div class="t-al-center f-s-20px f-w-bold cl-white">{{playingAlbum.name}}</div>
       <div v-for="(song, index) in playingAlbum.song" :key="index">
-        <span class="cl-white cs-pointer" v-if="index === ind"> {{index+1}}. {{song.name}} </span>
-        <span v-else class="cs-pointer" @click="setInd(index)"> {{index+1}}. {{song.name}} </span>
+        <span class="cl-white cs-pointer f-w-bold" v-if="index === ind"> {{index+1}}. {{song.name}} </span>
+        <span v-else class="cs-pointer f-w-bold" @click="setInd(index)"> {{index+1}}. {{song.name}} </span>
       </div>
     </div>
     <div class="player is-offset-3 dp-flex al-it-center">
