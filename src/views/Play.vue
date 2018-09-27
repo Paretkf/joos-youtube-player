@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <div class="song-list pd-5px ovf-auto" v-show="activeSonglist">
+      <span class="remove-tag mg-bt-5px f-right" @click="activeSonglist = false"> X </span>
       <div class="t-al-center f-s-20px f-w-bold cl-white">{{playingAlbum.name}}</div>
       <div v-for="(song, index) in playingAlbum.song" :key="index">
         <span class="cl-white cs-pointer f-w-bold" @click="setInd(index)" v-if="index === ind"> {{index+1}}. <u>{{song.name}}</u> </span>
@@ -147,10 +148,11 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .song-list {
+  border-radius: 18px;
   width: 20vw;
   float: right;
   height: 50vh;
-  background-color: rgb(255, 153, 204, 0.7);
+  background-color: rgb(255, 153, 204, 85%);
   margin-top: -51vh;
   margin-right: 10px;
 }
@@ -160,6 +162,16 @@ export default {
   height: 60px;
   background-color: rgb(255, 153, 204, 0.7);
   padding: 0px 10px 0px 10px;
+}
+.remove-tag  {
+  width: 24px;
+  height: 24px;
+  background-color: #ffffff;
+  color: rgb(255, 153, 204, 1);
+  font-weight: bold;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
 }
 .player {
   padding: 10px 0% 0px 0%;
