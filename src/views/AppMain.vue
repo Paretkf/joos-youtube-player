@@ -2,17 +2,12 @@
   <div class="body">
     <Header/>
     <div class="pd-20px app-body">
-      <span class="cl-white">Version beta 0.0.1c</span>
+      <span class="cl-white">Version beta 0.0.2a</span>
       <router-view/>
     </div>
-    <div>
-      <Play/>
-    </div>
-    <b-modal :active.sync="isImageModalActive">
-      <p class="image is-4by3">
-        <img src="/static/img/loading.gif">
-      </p>
-    </b-modal>
+    <!-- <div class="play"> -->
+      <Play class="play" />
+    <!-- </div> -->
   </div>
 </template>
 
@@ -34,6 +29,10 @@ export default {
 </script>
 
 <style scoped>
+.play {
+  position: absolute;
+  top: calc(100vh - 60px);
+}
 .body {
   background: #F2F6FA;
   background:url('/static/img/bg.jpg');
@@ -42,6 +41,6 @@ export default {
 }
 .app-body {
   overflow: auto;
-  height: calc(100vh - 120px);
+  height: calc(100vh - 60px);
 }
 </style>
