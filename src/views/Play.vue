@@ -3,7 +3,7 @@
     <div class="song-list pd-5px ovf-auto" v-show="activeSonglist">
       <div class="t-al-center f-s-20px f-w-bold cl-white">{{playingAlbum.name}}</div>
       <div v-for="(song, index) in playingAlbum.song" :key="index">
-        <span class="cl-white cs-pointer f-w-bold" v-if="index === ind"> {{index+1}}. {{song.name}} </span>
+        <span class="cl-white cs-pointer f-w-bold" @click="setInd(index)" v-if="index === ind"> {{index+1}}. <u>{{song.name}}</u> </span>
         <span v-else class="cs-pointer f-w-bold" @click="setInd(index)"> {{index+1}}. {{song.name}} </span>
       </div>
     </div>
@@ -152,6 +152,7 @@ export default {
   height: 50vh;
   background-color: rgb(255, 153, 204, 0.7);
   margin-top: -51vh;
+  margin-right: 10px;
 }
 .hello {
   /* position: absolute; */

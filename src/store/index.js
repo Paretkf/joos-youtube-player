@@ -20,7 +20,17 @@ const allAlbumsRef = db.ref('allAlbums')
 const state = {
   user: {},
   allAlbums: [],
-  playingAlbum: {}
+  playingAlbum: {
+    name: 'Start Album',
+    artist: 'Renai Circulation',
+    img: '',
+    song: [
+      {
+        name: 'Renai Circulation「恋愛サーキュレーション」歌ってみた【＊なみりん】',
+        url: 'https://www.youtube.com/watch?v=uKxyLmbOc0Q'
+      }
+    ]
+  }
 }
 
 const getters = {
