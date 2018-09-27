@@ -46,4 +46,7 @@ export default {
   align-items: center;
   justify-content: center;
 }
+#wrapper {
+  margin-bottom: 60px;
+}
 </style>
