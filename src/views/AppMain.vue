@@ -2,7 +2,7 @@
   <div class="body">
     <Header/>
     <div class="pd-20px app-body">
-      <span class="cl-white">Version beta 0.0.2a</span>
+      <span class="cl-white">Version beta 0.0.2b</span>
       <router-view/>
     </div>
     <!-- <div class="play"> -->
@@ -35,7 +35,7 @@ export default {
 }
 .body {
   background: #F2F6FA;
-  background:url('/static/img/bg.jpg');
+  background:url('/static/img/bg2.jpg');
   background-size: cover;
   background-position: center;
 }

@@ -8,10 +8,13 @@
     <span @click="login()" class="f-s-25px f-w-bold cl-white cs-pointer" v-if="!user.user">Facebook</span>
     <div v-else class="dp-flex al-it-center">
       <img :src="user.user.photoURL" alt="" class="bd-rd-20px mg-r-10px">
-      <span class="f-w-bold cl-white mg-r-10px">
-        {{user.user.displayName}} |
+      <span class="f-w-bold cl-white">
+        {{user.user.displayName}}
       </span>
-      <div @click="logout()" class="f-s-25px f-w-bold cl-white cs-pointer"> Logout </div>
+      <div>
+        <svg-filler class="cs-pointer mg-hrzt-10px" path="/static/svg/compact-disc-solid.svg" :fill="'#ffffff'" title="My Play List" width="30px" height="30px"/>
+      </div>
+      <div @click="logout()" class="f-s-25px f-w-bold cl-white cs-pointer"> | Logout </div>
     </div>
   </div>
 </div>

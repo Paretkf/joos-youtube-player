@@ -144,6 +144,20 @@ export default {
   border-radius: 50%;
   cursor: pointer;
 }
+.cl-primary {
+  background-color: #FF99CC;
+}
+.card {
+  background-color: rgb(255, 255, 255, 0.8);
+  border-radius: 4px;
+}
+.input.is-primary, .taginput .is-primary.taginput-container.is-focusable, .textarea.is-primary {
+  border-color: #FF99CC;
+  outline-color: #FF99CC;
+}
+.input.is-primary:focus, .taginput .is-primary.taginput-container.is-focusable:focus, .input.is-primary.is-focused, .taginput .is-primary.is-focused.taginput-container.is-focusable, .input.is-primary:active, .taginput .is-primary.taginput-container.is-focusable:active, .input.is-primary.is-active, .taginput .is-primary.is-active.taginput-container.is-focusable, .textarea.is-primary:focus, .textarea.is-primary.is-focused, .textarea.is-primary:active, .textarea.is-primary.is-active  {
+  box-shadow: 0 0 0 0.125em rgba(209, 0, 174, 0.21);
+}
 .create-album {
   height: calc(100vh - 180px);
   overflow: auto;

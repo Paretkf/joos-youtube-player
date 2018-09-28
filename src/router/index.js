@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import AllPlaylist from '@/views/AllPlaylist'
+import AllPlaylist from '@/views/AllPlaylist/AllPlaylist'
 import CreateAlbums from '@/views/CreateAlbums/CreateAlbums'
 
 Vue.use(Router)
