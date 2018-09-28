@@ -1,15 +1,15 @@
 <template>
-  <div class="cl-white">
-    <div class="w-40vw album-list">
+  <div class="cl-white dp-flex jtf-ct-space-around">
+    <div class="w-45vw album-list">
     <span class="f-s-30px f-w-bold"> My Playlist</span>
     <div>
       <div class="card cs-pointer pd-10px dp-flex jtf-ct-space-between">
         <div class="w-70pct">
           <div class="f-s-20px f-w-bold">
-            Playlist : Rachata Playlist
+            Mockup Playlist Joos
           </div>
           <div class="f-s-18px f-w-bold">
-            Amount Song : 3
+            Song : 3
           </div>
         </div>
         <div class="w-25pct">
@@ -18,6 +18,12 @@
       </div>
       <div class="add-btn" @click="addSong()">Create New Playlist</div>
     </div>
+    </div>
+    <div class="w-45vw" v-if="listSongToggle">
+
+    </div>
+
+    <div class="w-45vw song-list" v-else>
     </div>
   </div>
 </template>
@@ -29,6 +35,7 @@ export default {
   computed: {
     ...mapState({
       // state
+      listSongToggle: false
     })
   },
   methods: {
@@ -47,6 +54,12 @@ export default {
 .album-list {
   background-color: rgb(255, 153, 204,  0.5);
   padding: 10px;
+  height: calc(100vh - 160px);
+}
+.song-list {
+  background-color: rgb(255, 255, 255,  0.9);
+  padding: 10px;
+  border-radius: 18px;
   height: calc(100vh - 160px);
 }
 .add-btn {
