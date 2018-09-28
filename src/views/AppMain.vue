@@ -2,12 +2,10 @@
   <div class="body">
     <Header/>
     <div class="pd-20px app-body">
-      <span class="cl-white">Version beta 0.0.2b</span>
+      <span class="cl-white">Version beta 0.0.2c</span>
       <router-view/>
     </div>
-    <!-- <div class="play"> -->
-      <Play class="play" />
-    <!-- </div> -->
+    <Play class="play" />
   </div>
 </template>
 

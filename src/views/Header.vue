@@ -12,7 +12,7 @@
         {{user.user.displayName}}
       </span>
       <div>
-        <svg-filler class="cs-pointer mg-hrzt-10px" path="/static/svg/compact-disc-solid.svg" :fill="'#ffffff'" title="My Play List" width="30px" height="30px"/>
+        <svg-filler @click="$router.push({name: 'MyPlaylist'})" class="cs-pointer mg-hrzt-10px" path="/static/svg/compact-disc-solid.svg" :fill="'#ffffff'" title="My Play List" width="30px" height="30px"/>
       </div>
       <div @click="logout()" class="f-s-25px f-w-bold cl-white cs-pointer"> | Logout </div>
     </div>

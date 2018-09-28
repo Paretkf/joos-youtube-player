@@ -162,4 +162,14 @@ export default {
   height: calc(100vh - 180px);
   overflow: auto;
 }
+.button.is-primary {
+  background-color: #FF99CC;
+  font-weight: bold;
+  width: 100%;
+}
+.button.is-primary:hover {
+  background-color: rgb(248, 0, 124);
+  font-weight: bold;
+  width: 100%;
+}
 </style>
