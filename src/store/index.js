@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import firebase from 'firebase/app'
 import { firebaseMutations, firebaseAction } from 'vuexfire'
+import axios from 'axios'
 require('firebase/database')
 require('firebase/auth')
 const { config } = require('@/config')
@@ -16,10 +17,11 @@ Vue.use(Vuex)
 
 const db = app.database()
 const allAlbumsRef = db.ref('allAlbums')
-
+const userRef = db.ref('users')
 const state = {
   user: {},
   allAlbums: [],
+  myAlbums: {},
   playingAlbum: {
     name: 'Start Album',
     artist: 'Renai Circulation',
@@ -47,9 +49,23 @@ const mutations = {
   },
   SET_PLAYING_ALBUM (state, payload) {
     state.playingAlbum = payload
+  },
+  SET_MY_ALBUMS (state, payload) {
+    state.myAlbums = payload
   }
 }
 const actions = {
+  createUserAlbum ({state}, payload) {
+    userRef.child(`${state.user.user.uid}/playlist/`).push({
+      name: payload.name,
+      artist: payload.artist,
+      song: []
+    })
+  },
+  async getMyAlubums ({state, commit}) {
+    let result = await axios.get(`https://it-20y.firebaseio.com/users.json?orderBy=%22$key%22&equalTo=%22${state.user.user.uid}%22`)
+    commit('SET_MY_ALBUMS', result)
+  },
   nextAlbum ({state, commit}) {
     let index = 0
     do {
