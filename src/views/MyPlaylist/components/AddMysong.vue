@@ -3,29 +3,29 @@
     <form action="">
       <div class="modal-card" style="width: auto">
         <header class="modal-card-head">
-          <p class="modal-card-title">Create User Playlist</p>
+          <p class="modal-card-title">Add Song</p>
         </header>
         <section class="modal-card-body">
-          <b-field label="Playlist Name">
+          <b-field label="Song">
             <b-input
                 type="text"
-                v-model="newAlbum.name"
-                placeholder="Playlist Name"
+                v-model="song.name"
+                placeholder="Renai Circulation"
                 >
             </b-input>
           </b-field>
-          <b-field label="Artist Or Detail">
+          <b-field label="Youtube URL">
             <b-input
                 type="text"
-                v-model="newAlbum.artist"
-                placeholder="Artist Or Detail"
+                v-model="song.url"
+                placeholder="https://www.youtube.com/watch?v=uKxyLmbOc0Q"
                 >
             </b-input>
           </b-field>
         </section>
         <footer class="modal-card-foot">
           <div class="button" type="button" @click="$parent.close()">Close</div>
-          <div class="button is-primary" @click="createEmptyPlaylist()">Confirm</div>
+          <div class="button is-primary" @click="addNewSong()">Confirm</div>
         </footer>
       </div>
     </form>
@@ -33,43 +33,38 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
-  name: 'CreateUserPlaylist',
+  name: 'AddMysong',
+  props: {
+    album: {
+      type: Object
+    }
+  },
   data () {
     return {
-      newAlbum: {
+      song: {
         name: '',
-        artist: '',
-        img: '',
-        song: [
-          {
-            name: '',
-            url: ''
-          }
-        ]
+        url: ''
       }
     }
   },
-  computed: {
-    ...mapState({
-      // state
-    })
-  },
   methods: {
     ...mapActions({
-      // Actions
-      createUserAlbum: 'createUserAlbum'
+      addSongToMyAlbum: 'addSongToMyAlbum'
     }),
-    createEmptyPlaylist () {
+    addNewSong () {
       if (!this.validateData()) {
         return
       }
-      this.createUserAlbum(this.newAlbum)
+      this.addSongToMyAlbum({
+        album: this.album,
+        song: this.song
+      })
       this.$parent.close()
     },
     validateData () {
-      if (this.newAlbum.name === '' || this.newAlbum.artist === '') {
+      if (this.song.name === '' || this.song.url === '') {
         this.$swal({
           type: 'error',
           title: 'กรอกข้อมูลให้ครบ'

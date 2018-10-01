@@ -1,33 +1,38 @@
 <template>
   <div class="cl-white dp-flex jtf-ct-space-around">
     <div class="w-45vw album-list">
-    <span class="f-s-30px f-w-bold"> My Playlist</span>
-    <div>
-      <!-- {{myAlbums}} -->
-      <div class="card cs-pointer mg-bt-10px pd-10px dp-flex jtf-ct-space-between" v-for="(album, index) in myAlbums" :key="index">
-        <div class="w-70pct">
-          <div class="f-s-20px f-w-bold">
-            {{myAlbums.name}}
-            {{album.name}}
+      <span class="f-s-30px f-w-bold"> My Playlist</span>
+      <div class="list-item">
+        <!-- {{myAlbums}} -->
+        <div @click="selectAlbum = album, toggleListSong = true" class="card cs-pointer w-90pct mg-bt-10px pd-10px dp-flex jtf-ct-space-between" v-for="(album, index) in myAlbums" :key="index">
+          <div class="w-70pct">
+            <div class="f-s-20px f-w-bold">
+              <!-- {{album}} -->
+              {{album.name}}
+            </div>
+            <div class="f-s-18px f-w-bold">
+              {{album.song ? album.song.length : 0}}
+            </div>
           </div>
-          <div class="f-s-18px f-w-bold">
-            {{album.song ? album.song.length : 0}}
+          <div class="w-25pct">
+            <svg-filler class="f-right" path="/static/svg/angle-right-solid.svg" :fill="'#b7b7b7'" width="60px" height="60px"/>
           </div>
         </div>
-        <div class="w-25pct">
-          <svg-filler class="f-right" path="/static/svg/angle-right-solid.svg" :fill="'#b7b7b7'" width="60px" height="60px"/>
-        </div>
+        <div class="add-btn w-90pct" @click="activeCreatePlaylist = true">Create New Playlist</div>
       </div>
-      <div class="add-btn" @click="activeCreatePlaylist = true">Create New Playlist</div>
     </div>
-    </div>
-    <div class="w-45vw" v-if="listSongToggle">
+    <div class="w-45vw" v-if="!toggleListSong">
 
     </div>
     <div class="w-45vw song-list" v-else>
+      {{selectAlbum}}
+       <div class="add-btn pink" @click="activeAddMysong = true">Add New Song</div>
     </div>
-    <b-modal :active.sync="activeCreatePlaylist" has-modal-card>
+    <b-modal :active.sync="activeCreatePlaylist" has-modal-card :canCancel="['escape', 'x']">
       <CreateUserPlaylist/>
+    </b-modal>
+    <b-modal :active.sync="activeAddMysong" has-modal-card :canCancel="['escape', 'x']">
+      <AddMysong :album="selectAlbum"/>
     </b-modal>
   </div>
 </template>
@@ -35,15 +40,21 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import CreateUserPlaylist from './components/CreateUserPlaylist'
+import AddMysong from './components/AddMysong'
 export default {
   name: 'MyPlaylist',
   components: {
-    CreateUserPlaylist
+    CreateUserPlaylist,
+    AddMysong
   },
   data () {
     return {
-      listSongToggle: false,
-      activeCreatePlaylist: false
+      activeCreatePlaylist: false,
+      activeAddMysong: false,
+      selectAlbum: {
+        firebaseID: '12'
+      },
+      toggleListSong: true
     }
   },
   computed: {
@@ -57,6 +68,11 @@ export default {
       getMyAlubums: 'getMyAlubums'
     })
   },
+  watch: {
+    myAlbums (val) {
+      this.selectAlbum = this.myAlbums.find(album => album.firebaseID === this.selectAlbum.firebaseID)
+    }
+  },
   async mounted () {
     await this.getMyAlubums()
   }
@@ -64,6 +80,10 @@ export default {
 </script>
 
 <style scoped>
+.list-item {
+  overflow: auto;
+  height: calc(100vh - 240px);
+}
 .card {
   background-color: rgb(255, 255, 255, 0.8);
   border-radius: 4px;
@@ -74,6 +94,7 @@ export default {
   height: calc(100vh - 160px);
 }
 .song-list {
+  color: #4a4a4a;
   background-color: rgb(255, 255, 255,  0.9);
   padding: 10px;
   border-radius: 18px;
@@ -91,5 +112,9 @@ export default {
   font-weight: bold;
   color: #fff;
   padding: 3px 0px 3px 0px;
+}
+.pink {
+  border-color: rgb(255, 153, 204, 1);
+  color: rgb(255, 153, 204, 1);
 }
 </style>

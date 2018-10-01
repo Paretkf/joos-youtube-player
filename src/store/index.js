@@ -19,11 +19,7 @@ const db = app.database()
 const allAlbumsRef = db.ref('allAlbums')
 const userRef = db.ref('users')
 const state = {
-  user: {
-    user: {
-      uid: '2OBupBlC23Udi211K74TAViEv3I2'
-    }
-  },
+  user: {},
   allAlbums: [],
   myAlbums: {},
   playingAlbum: {
@@ -59,24 +55,30 @@ const mutations = {
   }
 }
 const actions = {
-  createUserAlbum ({state}, payload) {
+  createUserAlbum ({state, dispatch}, payload) {
     userRef.child(`${state.user.user.uid}/playlist/`).push({
       name: payload.name,
       artist: payload.artist,
       song: []
     })
+    dispatch('getMyAlubums')
+  },
+  async addSongToMyAlbum ({state, dispatch}, payload) {
+    const {data} = await axios.get(`https://it-20y.firebaseio.com/users.json?orderBy=%22$key%22&equalTo=%22${state.user.user.uid}%22`)
+    let song = data[state.user.user.uid].playlist[payload.album.firebaseID].song ? data[state.user.user.uid].playlist[payload.album.firebaseID].song : []
+    song.push(payload.song)
+    await userRef.child(`${state.user.user.uid}/playlist/${payload.album.firebaseID}/song`).set(song)
+    await dispatch('getMyAlubums')
   },
   async getMyAlubums ({state, commit}) {
     let result = []
     let {data} = await axios.get(`https://it-20y.firebaseio.com/users.json?orderBy=%22$key%22&equalTo=%22${state.user.user.uid}%22`)
     for (let index in data[state.user.user.uid].playlist) {
-      console.log(index)
       await result.push({
         ...data[state.user.user.uid].playlist[index],
         firebaseID: index
       })
     }
-    console.log(result)
     commit('SET_MY_ALBUMS', result)
   },
   nextAlbum ({state, commit}) {
