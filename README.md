@@ -1,6 +1,22 @@
 # joos
 
-> A Vue.js project
+> A Vue.js project for music website. You can custom your play list
+
+## Dependencies
+* begeta
+* buefy
+* firebase
+* vuex
+* vue-svg-filler
+* vuexfire
+* vue-youtube
+* vue-sweetalert2
+
+## Project Structure
+
+* **views** container root components for each page (.vue)
+* **store** container for vuex state
+* **config** container for config in project
 
 ## Build Setup
 
