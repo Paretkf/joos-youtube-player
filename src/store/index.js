@@ -19,7 +19,11 @@ const db = app.database()
 const allAlbumsRef = db.ref('allAlbums')
 const userRef = db.ref('users')
 const state = {
-  user: {},
+  user: {
+    user: {
+      uid: '2OBupBlC23Udi211K74TAViEv3I2'
+    }
+  },
   allAlbums: [],
   myAlbums: {},
   playingAlbum: {
@@ -63,7 +67,15 @@ const actions = {
     })
   },
   async getMyAlubums ({state, commit}) {
-    let result = await axios.get(`https://it-20y.firebaseio.com/users.json?orderBy=%22$key%22&equalTo=%22${state.user.user.uid}%22`)
+    let result = []
+    let {data} = await axios.get(`https://it-20y.firebaseio.com/users.json?orderBy=%22$key%22&equalTo=%22${state.user.user.uid}%22`)
+    for (let index in data[state.user.user.uid].playlist) {
+      console.log(index)
+      await result.push({
+        ...data[state.user.user.uid].playlist[index],
+        firebaseID: index
+      })
+    }
     console.log(result)
     commit('SET_MY_ALBUMS', result)
   },

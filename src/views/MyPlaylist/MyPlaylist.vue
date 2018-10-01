@@ -3,20 +3,21 @@
     <div class="w-45vw album-list">
     <span class="f-s-30px f-w-bold"> My Playlist</span>
     <div>
-      {{myAlbums}}
-      <!-- <div class="card cs-pointer pd-10px dp-flex jtf-ct-space-between">
+      <!-- {{myAlbums}} -->
+      <div class="card cs-pointer mg-bt-10px pd-10px dp-flex jtf-ct-space-between" v-for="(album, index) in myAlbums" :key="index">
         <div class="w-70pct">
           <div class="f-s-20px f-w-bold">
-            Mockup Playlist Joos
+            {{myAlbums.name}}
+            {{album.name}}
           </div>
           <div class="f-s-18px f-w-bold">
-            Song : 3
+            {{album.song ? album.song.length : 0}}
           </div>
         </div>
         <div class="w-25pct">
           <svg-filler class="f-right" path="/static/svg/angle-right-solid.svg" :fill="'#b7b7b7'" width="60px" height="60px"/>
         </div>
-      </div> -->
+      </div>
       <div class="add-btn" @click="activeCreatePlaylist = true">Create New Playlist</div>
     </div>
     </div>
@@ -53,8 +54,11 @@ export default {
   },
   methods: {
     ...mapActions({
-      // Action
+      getMyAlubums: 'getMyAlubums'
     })
+  },
+  async mounted () {
+    await this.getMyAlubums()
   }
 }
 </script>
