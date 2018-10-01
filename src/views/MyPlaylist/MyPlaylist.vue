@@ -3,6 +3,7 @@
     <div class="w-45vw album-list">
     <span class="f-s-30px f-w-bold"> My Playlist</span>
     <div>
+      {{myAlbums}}
       <!-- <div class="card cs-pointer pd-10px dp-flex jtf-ct-space-between">
         <div class="w-70pct">
           <div class="f-s-20px f-w-bold">
@@ -47,6 +48,7 @@ export default {
   computed: {
     ...mapState({
       // state
+      myAlbums: state => state.myAlbums
     })
   },
   methods: {

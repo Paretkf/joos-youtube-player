@@ -64,6 +64,7 @@ const actions = {
   },
   async getMyAlubums ({state, commit}) {
     let result = await axios.get(`https://it-20y.firebaseio.com/users.json?orderBy=%22$key%22&equalTo=%22${state.user.user.uid}%22`)
+    console.log(result)
     commit('SET_MY_ALBUMS', result)
   },
   nextAlbum ({state, commit}) {
