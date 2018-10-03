@@ -2,7 +2,6 @@
   <div class="body">
     <Header/>
     <div class="pd-20px pd-t-0px app-body">
-      <!-- {{user.user.uid}} -->
       <span class="cl-white">Version beta 0.0.2c</span>
       <router-view/>
     </div>
