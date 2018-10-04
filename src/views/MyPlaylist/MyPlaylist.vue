@@ -19,11 +19,15 @@
         <div class="add-btn w-90pct" @click="activeCreatePlaylist = true">Create New Playlist</div>
       </div>
     </div>
-    <div class="w-45vw" v-if="!toggleListSong">
-
+    <div class="w-45vw" v-if="!selectAlbum">
+      <!-- blank space -->
     </div>
     <div class="w-45vw song-list" v-else>
-      {{selectAlbum}}
+      <div class="f-s-25px f-w-bold t-al-center">{{selectAlbum.name}}</div>
+      <div v-for="(list, index) in selectAlbum.song" :key="index" class="song-item pd-hrzt-20px">
+        <span class="f-s-18px f-w-bold">{{index + 1}}. {{list.name}} </span> <br>
+        <span>{{list.url}}</span>
+      </div>
        <div class="add-btn pink" @click="activeAddMysong = true">Add New Song</div>
     </div>
     <b-modal :active.sync="activeCreatePlaylist" has-modal-card :canCancel="['escape', 'x']">
@@ -110,6 +114,9 @@ export default {
   font-weight: bold;
   color: #fff;
   padding: 3px 0px 3px 0px;
+}
+.song-item {
+  border-bottom: 2px solid rgb(255, 153, 204, 0.4);
 }
 .pink {
   border-color: rgb(255, 153, 204, 1);
