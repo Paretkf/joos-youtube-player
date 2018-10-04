@@ -3,11 +3,9 @@
     <div class="w-45vw album-list">
       <span class="f-s-30px f-w-bold"> My Playlist</span>
       <div class="list-item">
-        <!-- {{myAlbums}} -->
         <div @click="selectAlbum = album, toggleListSong = true" class="card cs-pointer w-90pct mg-bt-10px pd-10px dp-flex jtf-ct-space-between" v-for="(album, index) in myAlbums" :key="index">
           <div class="w-70pct">
             <div class="f-s-20px f-w-bold">
-              <!-- {{album}} -->
               {{album.name}}
             </div>
             <div class="f-s-18px f-w-bold">

@@ -53,12 +53,10 @@ export default {
   },
   computed: {
     ...mapState({
-      // state
     })
   },
   methods: {
     ...mapActions({
-      // Actions
       createUserAlbum: 'createUserAlbum'
     }),
     createEmptyPlaylist () {
