@@ -58,7 +58,7 @@ export default {
 }
 .play-icon {
   position: absolute;
-  /* margin: auto; */
+  margin-top: -10px;
   display: none;
 }
 .play-icon:hover {

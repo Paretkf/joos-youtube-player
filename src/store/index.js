@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 import firebase from 'firebase/app'
 import { firebaseMutations, firebaseAction } from 'vuexfire'
+import style from './modules/style_module'
+
 require('firebase/database')
 require('firebase/auth')
 const { config } = require('@/config')
@@ -16,10 +19,11 @@ Vue.use(Vuex)
 
 const db = app.database()
 const allAlbumsRef = db.ref('allAlbums')
-
+const userRef = db.ref('users')
 const state = {
   user: {},
   allAlbums: [],
+  myAlbums: {},
   playingAlbum: {
     name: 'Start Album',
     artist: 'Renai Circulation',
@@ -47,9 +51,43 @@ const mutations = {
   },
   SET_PLAYING_ALBUM (state, payload) {
     state.playingAlbum = payload
+  },
+  SET_MY_ALBUMS (state, payload) {
+    state.myAlbums = payload
   }
 }
 const actions = {
+  createUserAlbum ({state, dispatch}, payload) {
+    userRef.child(`${state.user.user.uid}/playlist/`).push({
+      name: payload.name,
+      artist: payload.artist,
+      song: []
+    })
+    dispatch('getMyAlubums')
+  },
+  async addSongToMyAlbum ({state, dispatch}, payload) {
+    const {data} = await axios.get(`https://it-20y.firebaseio.com/users.json?orderBy=%22$key%22&equalTo=%22${state.user.user.uid}%22`)
+    let song = data[state.user.user.uid].playlist[payload.album.firebaseID].song ? data[state.user.user.uid].playlist[payload.album.firebaseID].song : []
+    song.push(payload.song)
+    await userRef.child(`${state.user.user.uid}/playlist/${payload.album.firebaseID}/song`).set(song)
+    await dispatch('getMyAlubums')
+  },
+  async removeMySong ({dispatch}, payload) {
+    await payload.selectAlbum.song.splice(payload.index, 1)
+    await userRef.child(`${state.user.user.uid}/playlist/${payload.selectAlbum.firebaseID}/song`).set(payload.selectAlbum.song)
+    await dispatch('getMyAlubums')
+  },
+  async getMyAlubums ({state, commit}) {
+    let result = []
+    let {data} = await axios.get(`https://it-20y.firebaseio.com/users.json?orderBy=%22$key%22&equalTo=%22${state.user.user.uid}%22`)
+    for (let index in data[state.user.user.uid].playlist) {
+      await result.push({
+        ...data[state.user.user.uid].playlist[index],
+        firebaseID: index
+      })
+    }
+    commit('SET_MY_ALBUMS', result)
+  },
   nextAlbum ({state, commit}) {
     let index = 0
     do {
@@ -81,7 +119,9 @@ const actions = {
   })
 }
 
-const modules = {}
+const modules = {
+  style
+}
 
 export default new Vuex.Store({
   state,

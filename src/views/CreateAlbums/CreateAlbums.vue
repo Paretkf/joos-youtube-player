@@ -29,7 +29,6 @@
           <input type="text" class="input is-primary" v-model="s.name">
           <span class="f-w-bold">Youtube URL</span>
           <input type="text" class="input is-primary" v-model="s.url">
-          <!-- <hr> -->
         </div>
         <div class="add-btn" @click="addSong()">เพิ่มเพลง</div>
         <hr>

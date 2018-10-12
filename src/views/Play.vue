@@ -19,10 +19,11 @@
       <svg-filler class="cs-pointer mg-l-10px" path="/static/svg/list-solid.svg" :fill="'#ffffff'" @click="activeSonglist = !activeSonglist" width="30px" height="30px"/>
     </div>
     <youtube :video-id="videoId ? videoId : 'uKxyLmbOc0Q'"
-    @playing="playing"
-    @ended="nextVideo()"
-    ref="youtube"
-    v-show="false">
+      @playing="playing"
+      @ended="nextVideo()"
+      ref="youtube"
+      @error="error()"
+      v-show="false">
     </youtube>
 
   </div>
@@ -44,6 +45,12 @@ export default {
     ...mapActions({
       nextAlbum: 'nextAlbum'
     }),
+    error () {
+      this.$toast.open({
+        message: 'Url ของเพลงไม่ถูกต้อง',
+        type: 'is-success'
+      })
+    },
     playing () {
       console.log('we are watching!!!')
     },

@@ -1,8 +1,8 @@
 <template>
   <div class="body">
     <Header/>
-    <div class="pd-20px app-body">
-      <span class="cl-white">Version beta 0.0.2c</span>
+    <div class="pd-20px pd-t-0px app-body">
+      <span class="cl-white">Version beta 1.0.2a release 1</span>
       <router-view/>
     </div>
     <Play class="play" />
@@ -12,6 +12,7 @@
 <script>
 import Header from '@/views/Header'
 import Play from '@/views/Play'
+import { mapState } from 'vuex'
 export default {
   name: 'AppMain',
   data () {
@@ -22,6 +23,11 @@ export default {
   components: {
     Header,
     Play
+  },
+  computed: {
+    ...mapState({
+      user: state => state.user
+    })
   }
 }
 </script>
