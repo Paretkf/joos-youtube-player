@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 import firebase from 'firebase/app'
 import { firebaseMutations, firebaseAction } from 'vuexfire'
-import axios from 'axios'
+import style from './modules/style_module'
+
 require('firebase/database')
 require('firebase/auth')
 const { config } = require('@/config')
@@ -117,7 +119,9 @@ const actions = {
   })
 }
 
-const modules = {}
+const modules = {
+  style
+}
 
 export default new Vuex.Store({
   state,

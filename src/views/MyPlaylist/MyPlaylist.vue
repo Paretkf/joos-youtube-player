@@ -68,7 +68,6 @@ export default {
   },
   computed: {
     ...mapState({
-      // state
       myAlbums: state => state.myAlbums
     })
   },
@@ -88,6 +87,7 @@ export default {
     }
   },
   async mounted () {
+    this.selectAlbum = {}
     await this.getMyAlubums()
   }
 }
