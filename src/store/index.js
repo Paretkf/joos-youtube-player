@@ -70,6 +70,11 @@ const actions = {
     await userRef.child(`${state.user.user.uid}/playlist/${payload.album.firebaseID}/song`).set(song)
     await dispatch('getMyAlubums')
   },
+  async removeMySong ({dispatch}, payload) {
+    await payload.selectAlbum.song.splice(payload.index, 1)
+    await userRef.child(`${state.user.user.uid}/playlist/${payload.selectAlbum.firebaseID}/song`).set(payload.selectAlbum.song)
+    await dispatch('getMyAlubums')
+  },
   async getMyAlubums ({state, commit}) {
     let result = []
     let {data} = await axios.get(`https://it-20y.firebaseio.com/users.json?orderBy=%22$key%22&equalTo=%22${state.user.user.uid}%22`)
